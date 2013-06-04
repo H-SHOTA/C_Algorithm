@@ -85,7 +85,8 @@ void main()
 				a = pop();
 				push( a / b);
 				break;
-			case '\n':
+			case 'a':
+			case'A':
 				if(!empty())
 				{
 					printf("“š‚¦‚Í%ld‚Å‚·\n", pop());
@@ -102,5 +103,6 @@ void main()
 				break;
 			}
 		}
+		getchar();
 	}
 }
