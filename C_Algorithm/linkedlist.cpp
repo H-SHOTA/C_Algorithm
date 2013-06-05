@@ -5,12 +5,21 @@
 #include <stdio.h>
 #include <ctype.h>
 
+// リストの構造
 struct CELL{
 	struct CELL *next;
 	int value;
 } header;
 
-bool insert(int value)
+// 削除方式
+enum DELETE_TYPE{
+	FRONT = 0,	//先頭削除
+	REAR,		//末尾削除
+	SPECIFIC	//特定の値の削除
+};
+
+// 挿入
+bool Insert(int value)
 {
 	CELL *newVal, *now, *prev;
 	// 新要素生成
@@ -21,7 +30,7 @@ bool insert(int value)
 	}
 	newVal->value = value;
 
-	// 末尾挿入
+	// 末尾移動
 	now = header.next;
 	prev = &header;
 	while( now != NULL )
@@ -37,10 +46,41 @@ bool insert(int value)
 	return true;
 }
 
+// 削除
+bool Delete(int value, DELETE_TYPE _type)
+{
+	switch(_type)
+	{
+	case FRONT:
+		{
+			if(&header == NULL)
+			{
+				printf("list is empty\n");
+				return false;
+			}
+
+			CELL temp = header;
+			header = *temp.next;
+			free(&temp);
+		}
+	case REAR:
+		{
+
+		}
+	case SPECIFIC:
+		{
+
+		}
+	default:
+		break;
+	}
+}
+
 void main()
 {
-	insert(5);
-	insert(4);
-	insert(3);
+	Insert(5);
+	Insert(4);
+	Insert(3);
+	Delete(0, FRONT);
 	return;
 }
